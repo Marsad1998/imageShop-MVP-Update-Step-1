@@ -1,0 +1,2 @@
+# imageShop MVP Update Step 1
+ This Module Only Include Contributor Signup/ Register Get Verified By Email and Login to Dashboard After That they can update their profiles add images in Various Categoires and It can be in Deactive State. Same Step is Followed By Admin Then Admin open his dashboard and update profile and also see the contibutors requesrt of image approval he can approve if he want also admin can set category and subcategory
