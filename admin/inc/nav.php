@@ -12,7 +12,7 @@
 				<a class="nav-link" href="index.php?nav=add_categories">Categories</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="index.php?nav=brands">Sub Categories</a>
+				<a class="nav-link" href="index.php?nav=brands">Brands</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="index.php?nav=contributors">Contributors</a>

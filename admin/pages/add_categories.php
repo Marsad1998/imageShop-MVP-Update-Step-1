@@ -1,3 +1,4 @@
+<input type="hidden" id="reloadPage" value="add_categories">
 <div class="card">
 	<div class="card-header">Categories</div>
 	<div class="card-body">
@@ -5,26 +6,27 @@
 		<p class="card-text">
 			<div class="row">
 				<div class="col-sm-6">
-					<?php getMessage(@$msg, @$sts, 3000) ?>
-					<form action="" method="POST" role="form">
+					<span id="msge" class="alert"></span>
+					<form action="" method="POST" role="form" id="formData">
 						<div class="form-group">
 							<label for="">Categories Name</label>
-							<input value="<?=@$fetchCate['cate_name']?>" type="text" class="form-control" name="cate_name" required=""> 
-							<input value="<?=@$fetchCate['cate_id']?>" type="text" value="<?=$fetchCate['cate_id']?>" class="d-none" name="cate_id"> 
+							<input type="text" class="form-control cate_name" name="cate_name" required="" id="cate_name"> 
+							  <input type="hidden" name="cateData" id="cateData" value="categories">
 						</div>
 						<div class="form-group">
 							<label for="">Status</label>
-							<select name="cate_sts" class="form-control" required="required">
+							<select name="cate_sts" id="cate_sts" class="form-control">
 								<option value="">~~SELECT~~</option>
-								<option <?php if(@$fetchCate['cate_sts'] == 1) {?> <?php echo "selected";?> <?php }?> value="1">Active</option>
-								<option <?php if(@$fetchCate['cate_sts'] == 0) {?> <?php echo "selected";?> <?php }?> value="0">Deactive</option>
+								<option value="1">Active</option>
+								<option value="0">Deactive</option>
 							</select>
 						</div>
-						<!-- <button type="submit" name="cate_subByAdmin" class="btn btn-primary">Submit</button> -->
-						<?=$cateBtn ?>
+						<input type="hidden" id="cate_id" name="cate_id"> 
+						<button type="submit" name="cate_subByAdmin" id="saveData" class="btn btn-primary">Submit</button>
 					</form>
 				</div><!-- col -->
 				<div class="col-sm-6">
+					<div id="Reload">	
 					<table class="table table-bordered">
 						<thead>
 							<tr>
@@ -43,14 +45,17 @@
 								<td><?=$x?></td>
 								<td><?=$r['cate_name']?></td>
 								<td><?=isActive($r['cate_sts'])?></td>
-								<td><a href="index.php?nav=add_categories&edit_cate_id=<?=$r['cate_id']?>">Edit</a> | <a href="index.php?nav=add_categories&del_cate_id=<?=$r['cate_id']?>">Delete</a></td>
+								<td><button class="btn btn-info btn-sm update" id="<?=$r['cate_id']?>">Edit</button> | <button class="show-example-btn btn btn-danger delete btn-sm" onclick="DeleteData(<?=$r['cate_id']?>)">X</button></td>
+								<input type="hidden" class="form-control" id="table_name" value="categories">
+                                <input type="hidden" class="form-control" id="col_name" value="cate_id">
 							</tr>
-							<?php 
+							 <?php 
 								$x++;
 								endwhile; 
 							?>
 						</tbody>
 					</table>
+				  </div><!--reload-->
 				</div><!-- col -->
 			</div><!-- row -->
 

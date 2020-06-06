@@ -1,5 +1,4 @@
 <?php include_once '../connect/db.php'; ?>
-<?php include_once 'inc/code.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +10,13 @@
 		<div class="row">
 		<div class="col-md-4"></div>
 		<div class="col-md-4 jumbotron">
-			<?php getMessage(@$msg, @$sts, 3000) ?>
+			<span id="msge" class="alert"></span>
 			<legend class="text-center">Singup CMS</legend>
-			<form action="" method="POST">
+			<form action="" method="POST" id="formData" role="form">
 				<div class="form-group">
 					<label for="" class="control-label">Name</label>
 					<input type="text" class="form-control" name="contr_name" required="">
+					<input type="hidden" name="registorData" id="registorData" value="contributors">
 				</div><!--form groupp-->
 				<div class="form-group">
 					<label for="" class="control-label">Email</label>
@@ -35,14 +35,14 @@
 							<div class="col-md-9">
 								<input type="text" placeholder="Confirm You're not a bot" name="captcha" autocomplete="off" required="" class="form-control">
 							</div>
-						</div><!--row-->
-				</div><!--form grssoup-->
+						</div>
+				</div>
 				<div class="form-group">
-				<input type="submit" name="contr_registor" value="Registor" class="btn btn-primary pull-right btn-block">
+				<input type="submit" name="contr_registor" id="saveData" value="Registor" class="btn btn-primary pull-right btn-block">
 			   </div>
 			</form><!--FORM-->
 		</div><!--col-sm-4-->
-		<div class="col-sm-4"></div>
+		<div class="col-ms-4"></div>
 		</div>
 	</div><!---conatonet-->
 	<?php include_once 'links/foot.php'; ?>

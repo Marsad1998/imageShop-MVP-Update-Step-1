@@ -1,3 +1,14 @@
 .form-control{
 	border-radius: 0px;
 }
+/*CUSTOM CSSS"*/
+  img{
+  width : 20%;
+  height: 20%;
+  position: relative;
+  cursor: pointer;
+}
+input[type=file]{
+padding : 2px;
+/*background : #2d2d2d;*/
+}

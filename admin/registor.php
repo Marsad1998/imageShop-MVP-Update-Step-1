@@ -1,5 +1,4 @@
 <?php include_once '../connect/db.php'; ?>
-<?php include_once 'inc/code.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

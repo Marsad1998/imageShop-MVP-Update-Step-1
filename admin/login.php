@@ -1,5 +1,5 @@
 <?php include_once '../connect/db.php'; ?>
-<?php include_once 'inc/code.php'; ?>
+<?php include 'php/adminsingup.php'; ?>
 <?php if(isset($_SESSION['admin_login'])): 
     redirect("index.php", 2000);
 ?>
@@ -28,7 +28,7 @@
                             <label for="">Pasword</label>
                             <input type="password" placeholder="Password" name="admin_pass" class="form-control">
                         </div><!--form froup-->
-                        <button class="btn btn-primary pull-right" name="admin_login" style="padding: 10px">Login</button>
+                        <button class="btn btn-primary pull-right" name="admin_login_btn" style="padding: 10px">Login</button>
                     </form><!--form-->
                     <a href="registor.php">New? Get Yourself Register For Free!</a>
                 </div><!--col- md -4-->

@@ -1,3 +1,4 @@
+<input type="hidden" id="reloadPage" value="brands">
 <div class="card">
 	<div class="card-header">Sub Categories</div>
 	<div class="card-body">
@@ -5,26 +6,27 @@
 		<p class="card-text">
 			<div class="row">
 				<div class="col-sm-6">
-					<?php getMessage(@$msg, @$sts, 3000) ?>
-					<form action="" method="POST" role="form">
+					<span id="msge" class="alert"></span>
+					<form action="" method="POST" role="form" id="formData">
 						<div class="form-group">
 							<label for="">Sub Categories Name</label>
-							<input type="text" value="<?=@$fetchBrand['brand_name']?>" class="form-control" name="brand_name" required=""> 
-							<input type="text" value="<?=@$fetchBrand['brand_id']?>" class="d-none" name="brand_id"> 
+							<input type="text" class="form-control brand_name" name="brand_name" required="" id="brand_name">
+							 <input type="hidden" class="form-control" name="brandData" id="brandData" value="brands"> 
 						</div>
 						<div class="form-group">
 							<label for="">Status</label>
-							<select name="brand_sts" class="form-control" required="required">
+							<select name="brand_sts" class="form-control brand_sts" required="required" id="brand_sts">
 								<option value="">~~SELECT~~</option>
-								<option <?php if(@$fetchBrand['brand_sts'] == 1) {?> <?php echo "selected";?> <?php }?> value="1">Active</option>
-								<option <?php if(@$fetchBrand['brand_sts'] == 0) {?> <?php echo "selected";?> <?php }?> value="0">Deactive</option>
+								<option value="1">Active</option>
+								<option value="0">Deactive</option>
 							</select>
 						</div>
-						<?=$brandBtn?>
-						<!-- <button type="submit" name="sub_cate_subByAdmin" class="btn btn-primary">Save</button> -->
+						<input type="hidden" name="brand_id" id="brand_id">
+						<button type="submit" name="sub_cate_subByAdmin" id="saveData" class="btn btn-primary">Save</button>
 					</form>
 				</div><!-- col -->
 				<div class="col-sm-6">
+					<div id="Reload">
 					<table class="table table-bordered">
 						<thead>
 							<tr>
@@ -43,7 +45,9 @@
 								<td><?=$x?></td>
 								<td><?=$r['brand_name']?></td>
 								<td><?=isActive($r['brand_sts'])?></td>
-								<td><a href="index.php?nav=brands&edit_brand_id=<?=$r['brand_id']?>">Edit</a> | <a href="index.php?nav=brands&del_brand_id=<?=$r['brand_id']?>">Delete</a></td>
+								<td><button class="btn btn-info btn-sm update" id="<?=$r['brand_id']?>">Edit</button> | <button class="show-example-btn btn btn-danger delete btn-sm" onclick="DeleteData(<?=$r['brand_id']?>)">X</button></td>
+								<input type="hidden" class="form-control" id="table_name" value="brands">
+                                <input type="hidden" class="form-control" id="col_name" value="brand_id">
 							</tr>
 							<?php 
 								$x++;
@@ -51,9 +55,9 @@
 							?>
 						</tbody>
 					</table>
+				   </div><!--reload-->
 				</div><!-- col -->
 			</div><!-- row -->
-
 		</p>
 	</div>
 </div>

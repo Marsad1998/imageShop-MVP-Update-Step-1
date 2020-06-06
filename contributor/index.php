@@ -1,8 +1,8 @@
-<?php if(!isset($_SESSION['admin_login'])):
+<?php include 'php/singup.php'; ?>
+<?php if(!isset($_SESSION['contr_login'])):
  header('login.php');
 ?>
 <?php include_once '../connect/db.php'; ?>
-<?php include_once 'inc/code.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

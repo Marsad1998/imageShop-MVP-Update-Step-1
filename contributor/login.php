@@ -1,5 +1,5 @@
 <?php include_once '../connect/db.php'; ?>
-<?php include_once 'inc/code.php'; ?>
+<?php include 'php/singup.php'; ?>
 <?php if(isset($_SESSION['contr_login'])): 
     redirect("index.php", 2000);
 ?>
@@ -17,7 +17,7 @@
                 <div class="col-md-4 jumbotron">
                     <form action="" method="POST">
                         <p class="login-box-msg text-center">
-                        	<?php getMessage(@$msg, @$sts, 2000);?>
+                        	<span id="msge" class="alert"></span>
                         </p>
                         <div class="form-group ">
                             <label for="">Email:</label>
@@ -28,7 +28,7 @@
                             <label for="">Pasword</label>
                             <input type="password" placeholder="Password" name="contr_pass" class="form-control">
                         </div><!--form froup-->
-                        <button class="btn btn-primary pull-right" name="contr_login" style="padding: 10px">Login</button>
+                        <button class="btn btn-primary pull-right" name="contr_login_btn" style="padding: 10px">Login</button>
                     </form><!--form-->
                     <a href="registor.php">New? Get Yourself Register For Free!</a>
                 </div><!--col- md -4-->

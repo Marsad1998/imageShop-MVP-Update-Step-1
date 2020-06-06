@@ -1,5 +1,8 @@
-Please Wait
-<?php include_once '../connect/db.php';
-session_destroy();
-redirect("login.php",1500);
-?>
+<?php 
+  session_start();
+  session_destroy();
+  header('refresh:1;url=login.php');
+ ?>
+ <p>
+ 	please wait....
+ </p>

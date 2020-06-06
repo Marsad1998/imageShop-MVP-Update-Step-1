@@ -83,12 +83,7 @@ echo "<div class='alert alert-{$sts}'>{$msg}</div>";
 }
 }
 ?>
-<script>
-  setTimeout(function(){ 
-    $(".alert").hide(2000); 
-  }, <?=@$time?>);
-</script>
-  <?php 
+<?php 
   //Delete Data From Table
   function deleteFromTable($dbc,$table,$fld="",$id){
   global $sts;
