@@ -9,13 +9,13 @@
 				<a class="nav-link" href="index.php?nav=home">Home</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="index.php?nav=add_categories">Categories</a>
+				<!-- <a class="nav-link" href="index.php?nav=add_categories">Categories</a> -->
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="index.php?nav=brands">Brands</a>
+				<!-- <a class="nav-link" href="index.php?nav=brands">Brands</a> -->
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="index.php?nav=contributors">Contributors</a>
+				<!-- <a class="nav-link" href="index.php?nav=contributors">Contributors</a> -->
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="index.php?nav=cart">Cart <span class="badge badge-secondary"><?php

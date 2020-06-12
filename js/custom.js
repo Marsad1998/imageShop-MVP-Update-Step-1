@@ -17,25 +17,23 @@ function fetchContributor(){
 	    	}else{
 	    		var abc = index.contr_img;
 	    	}
-	     var addccontr = `<div class="col-sm-3">
+	     var addccontr = `<div class="col-sm-3 main-div"><a href="index.php?nav=view_contributor&contr_id=`+index.contr_id+`" >
 	     <div class="card">
 	     	      <div class="card-body">
 					<p class="card-text">
 					<form action="" method="POST">
-					  <input type='file' name="uploadPic" id="uploadPic" onchange="readURL(this);" style="display: none;">
-	                  <img src="contributor/uploads/`+abc+`" class="img-responsive" style="width: 100%;height:200px" alt="Invalid Image Type Click To Change">
+					  <img src="contributor/uploads/`+abc+`" class="img-responsive" style="width: 100%;height:200px" alt="Invalid Image Type Click To Change">
 					</p>
 				</div>
 				<div class="card-footer">
-					<label for="">Name:` +index.contr_name+`</label><br>	
+					<label class="name">Name:` +index.contr_name+`</label><br>	
 					<label for="">Email: `+index.contr_email+`</label><br>	
-					<label for="">Location: `+index.contr_country+`</label><br>
+					<label class="location">Location: `+index.contr_country+`</label><br>
 					  <label for="">Total Collection : `+response.count[value]+` 
-					  <a href="index.php?nav=view_contributor&contr_id=`+index.contr_id+`" class="btn 
-					  btn-success" name="upload_contr" type="submit" id="saveData">View Profile</a>
+					  <button class="btn btn-success" name="upload_contr" type="submit" id="saveData">View Profile</button>
 					</form>
 				</div>
-			   </div></div>`;
+			   </div></a></div>`;
 			$(`#cardappend`).append(addccontr);
 		});
 	   }	
@@ -73,3 +71,58 @@ function fetchContributor(){
  		 }
  	}); 	
  }
+
+$("#paypalcheckout").hide();   
+
+//Save Data into Database
+$("#proceedForm").on('submit',function(e) {
+    e.preventDefault();
+    var form = $('#proceedForm');
+    $.ajax({
+        type: 'POST',
+        url: form.attr('action'),
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend:function() {
+            $('#proceed').attr("disabled","disabled");
+            $('#proceed').text("Loading...");
+        },
+        success:function (msg) {
+            $('#proceed').text("Save");
+            $('#proceedForm').each(function(){
+                this.reset();
+            });
+            $('#proceed').removeAttr("disabled");
+            $('.proceedForm').hide();
+            $("#paypalcheckout").show();   
+        }
+    });//ajax call
+});//main
+
+//  document.getElementById("box").oninput=function(){
+//     for (var i=0;i<document.getElementsByClassName("name").length;i++) {
+//         if (document.getElementsByClassName("name")[i].innerHTML.match(new RegExp(document.getElementById("box").value, "gi"))) {
+//             document.getElementsByClassName("name")[i].parentElement.parentElement.parentElement.style.display="inline-block";
+//         } else {       document.getElementsByClassName("name")[i].parentElement.parentElement.parentElement.style.display="none";
+//         }
+//     }
+// }
+
+$("#box").on('keyup', function(){
+  var matcher = new RegExp($(this).val(), 'gi');
+  $('.main-div').show().not(function(){
+      return matcher.test($(this).find('.name, .location').text())
+  }).hide();
+});
+
+// document.getElementById("box").oninput=function(){
+//     for (var i=0;i<document.getElementsByClassName("name").length;i++) {
+//         if (document.getElementsByClassName("name")[i].innerHTML.match(new RegExp(document.getElementById("box").value, "gi"))) {
+//             document.getElementsByClassName("name")[i].parentElement.parentElement.parentElement.style.display="inline-block";
+//         } else {       
+//         	document.getElementsByClassName("name")[i].parentElement.parentElement.parentElement.style.display="none";
+//         }
+//     }
+// }

@@ -8,7 +8,7 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				<label for=""></label>
-				<input type="text" class="form-control" placeholder="Search...." style="border-radius: 0px;height: 50px">
+				<input type="text" class="form-control" id="box" placeholder="Search...." style="border-radius: 0px;height: 50px">
 			</div>
 		</div>
 		<div class="col-md-4">

@@ -2,13 +2,18 @@
 	<p class="text-center">View Profile</p>
 </div>
 <br>
+<?php 
+	// Include configuration file 
+	include_once 'config.php'; 
+	include_once 'connect/db.php'; 
+?>
 <div class="container">
 	<?php echo @$status; ?>
 	<div class="row">
 		 <div class="col-sm-3">
 		 <?php 
 		 $id = $_REQUEST['contr_id']; 
-       	   $q=get($dbc,"contributors WHERE contr_id = 1");
+       	   $q=get($dbc,"contributors WHERE contr_id = $id");
             while($r=mysqli_fetch_assoc($q)):?>
 			<div class="card">
 			  <div class="card-header">Countributor</div>
@@ -54,12 +59,33 @@
 			     	<br><br>
 		    	<button type="submit" class="btn btn-info" name="addToCart">Add To Cart</button>
 		    </form>
-		    	</div>
+            <form action="<?php echo PAYPAL_URL; ?>" method="post">
+				<!-- Identify your business so that you can collect the payments. -->
+				<input type="hidden" name="business" value="<?php echo PAYPAL_ID; ?>">
+				
+			    <!-- Specify a Buy Now button. -->
+			    <input type="hidden" name="cmd" value="_xclick">
+				
+			    <!-- Specify details about the item that buyers will purchase. -->
+			    <input type="hidden" name="item_name" value="<?php echo $row['img_title']; ?>">
+			    <input type="hidden" name="item_number" value="<?php echo $row['img_id']; ?>">
+			    <input type="hidden" name="amount" value="<?php echo $row['img_price']; ?>">
+			    <input type="hidden" name="currency_code" value="<?php echo PAYPAL_CURRENCY; ?>">
+				
+			    <!-- Specify URLs -->
+			    <input type="hidden" name="return" value="<?php echo PAYPAL_RETURN_URL; ?>">
+			    <input type="hidden" name="cancel_return" value="<?php echo PAYPAL_CANCEL_URL; ?>">
+				<br>
+			    <!-- Display the payment button. -->
+			    <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif">
+		    </div>
+			</form>
 		    <?php endwhile; ?>
 		    </div>
 		    <br><br><br>
-		    <div class="row" id="addimg">
-		    </div><!--col-sm-3-->
+		    <div class="row" id="addimg"></div>
+
+
 		</div><!--col-sm 9-->
 	</div><!--row-->
 </div><!--conatiner-->
