@@ -1,5 +1,5 @@
 <?php include_once '../connect/db.php'; ?>
-<?php include 'php/adminsingup.php'; ?>
+<?php //include 'php/adminsingup.php'; ?>
 <?php if(isset($_SESSION['admin_login'])): 
     redirect("index.php", 2000);
 ?>
@@ -15,13 +15,11 @@
             <div class="row">
                 <div class="col-md-4"></div><!--cSol-md 4-->
                 <div class="col-md-4 jumbotron">
-                    <form action="" method="POST">
-                        <p class="login-box-msg text-center">
-                        	<?php getMessage(@$msg, @$sts, 2000);?>
-                        </p>
+                    <form action="" method="POST" id="formData">
+                        <div class="msg"></div>
                         <div class="form-group ">
                             <label for="">Email:</label>
-                            <input type="text" placeholder="Email" name="admin_email" class="form-control">
+                            <input type="text" placeholder="Email" name="admin_email1" class="form-control">
                         </div><!--form group-->
                         <br>
                         <div class="form-group">

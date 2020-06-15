@@ -1,5 +1,5 @@
 <?php 
-$fetchcontr = mysqli_fetch_assoc(mysqli_query($dbc,"SELECT * FROM contributors WHERE contr_email = '$_SESSION[contr_login]'"));
+	$fetchcontr = mysqli_fetch_assoc(mysqli_query($dbc,"SELECT * FROM contributors WHERE contr_email = '$_SESSION[contr_login]'"));
 ?>
 <input type="hidden" id="reloadPage" value="contr_add_img">
 <div class="card">
@@ -7,7 +7,7 @@ $fetchcontr = mysqli_fetch_assoc(mysqli_query($dbc,"SELECT * FROM contributors W
 	<div class="card-body">
 		<h4 class="card-title">Add Images</h4>
 		<p class="card-text">
-					<span id="msge" class="alert"></span>
+			<div class="msg"></div>
 			<div class="row">
 				<div class="col-sm-6">
 					<form action="" method="POST" id="formData">

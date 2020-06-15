@@ -13,14 +13,19 @@ $(document).ready(function(){
       contentType: false,
       cache: false,
       processData: false,
+      dataType: 'json',
       beforeSend:function() {
       $('#saveData').attr("disabled","disabled");
       $('#formData').css("opacity","0.5");
       },
-      success:function (msge) {
-        console.log(msge)
+      success:function (msg) {
+        console.log(msg)
+        if (msg.msg == "Login Successfully") {
+          window.location.href = "../admin/";
+        }
         $('#formData')[0].reset();
-        $('#msge').text(msge).addClass("alert-success").fadeIn(2000).fadeOut(3000);
+        $('.msg').text(msg.msg).addClass("alert alert-"+msg.sts).fadeIn(6000).fadeOut(6000);
+        $('#msg').text(msg.msg).addClass("alert alert-"+msg.sts).fadeIn(6000).fadeOut(6000);
         $('#saveData').removeAttr("disabled");      
         $('#formData').css("opacity","");    
         $("#blah").attr("src","uploads/default.png");
@@ -39,7 +44,9 @@ $(document).ready(function(){
       contentType: false,
       cache: false,
       processData: false,
-      success:function (msge) {
+      dataType: "json",
+      success:function (msg) {
+        $(".msg").addClass("alert alert-"+msg.sts).fadeIn(3000).fadeOut(4000);
         $('#formData1')[0].reset();
         $('#saveData1').removeAttr("disabled");      
         $('#formData1').css("opacity","");    
@@ -115,10 +122,9 @@ function DeleteData(deleteid){
      url:'inc/code.php',
      method:'POST',
      data:{deleteid:deleteid,tbl2:tbl,col2:col},
-     succes:function(deleteid){
-        console.log(deleteid);  
-       }// success function
-       });// ajax cal
+     succes:function(deleteid){  
+     }// success function
+     });// ajax cal
      $("#Reload").load('index.php?nav='+reloadPage+' #Reload');     
      }// preconfrom function
    });// swal file

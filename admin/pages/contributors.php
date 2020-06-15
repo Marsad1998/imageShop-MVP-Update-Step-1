@@ -6,7 +6,7 @@
 				<div class="col-sm-4">
 					<?php getMessage(@$msg, @$sts, 3000) ?>
 					<?php  
-						$id = $_GET['contr_id'];
+						@$id = $_GET['contr_id'];
 						$fetchContr = fetchRecord($dbc, "contributors", "contr_id", $id);
 					?>
 					<form action="" method="POST" role="form">

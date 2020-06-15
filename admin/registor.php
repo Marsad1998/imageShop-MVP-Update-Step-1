@@ -10,12 +10,13 @@
 		<div class="row">
 		<div class="col-md-4"></div>
 		<div class="col-md-4 jumbotron">
-			<?php getMessage(@$msg, @$sts, 3000) ?>
+			<?php //getMessage(@$msg, @$sts, 3000) ?>
 			<legend class="text-center">Singup CMS</legend>
-			<form action="" method="POST">
+			<form action="" method="POST" id="formData">
+				<div class="msg"></div>
 				<div class="form-group">
 					<label for="" class="control-label">Name</label>
-					<input type="text" class="form-control" name="admin_name" required="">
+					<input type="text" class="form-control" name="admin_name1" required="">
 				</div><!--form groupp-->
 				<div class="form-group">
 					<label for="" class="control-label">Email</label>

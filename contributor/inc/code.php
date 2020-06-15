@@ -1,6 +1,26 @@
 <?php 
 //*********************Imgages CRUD***********************\
 include '../../connect/db.php';
+if (isset($_POST['contr_email2'])) {
+      $contr_email = validate_data($dbc,strip_tags($_POST['contr_email2']));
+      $contr_pass = $_POST['contr_pass'];
+      $sql = mysqli_query($dbc,"SELECT * FROM contributors WHERE contr_email = '$contr_email' AND contr_pass = '$contr_pass' AND contr_sts = 1");
+       $count = mysqli_num_rows($sql);
+       if ($count == 1) {
+        	$_SESSION['contr_login'] = $contr_email;
+        	$msg = "Login Successfully";
+        	$sts = "success";
+			echo json_encode(array('msg' => $msg, 'sts' => $sts));
+       }else{
+			$msg = "Invaild Email OR Password OR Your Account is Not Verified";
+			$sts = "danger";   
+			echo json_encode(array('msg' => $msg, 'sts' => $sts));
+       }
+}
+
+// UpDate Fetch Teachers Data 
+@$fetchcontr = mysqli_fetch_assoc(mysqli_query($dbc,"SELECT * FROM contributors WHERE contr_email = '$_SESSION[contr_login]'"));
+
 if(isset($_POST['imagesData'])=="images"){
 	if($_POST['img_id'] != ""){
 		if (upload_pic($_FILES['img_file'], "../uploads/")) {
@@ -16,6 +36,9 @@ if(isset($_POST['imagesData'])=="images"){
 			$previousImage = fetchRecord($dbc, "images", "img_id", $_POST['img_id'])['img_file'];
 			unlink("../uploads/".$previousImage);
 			update_data($dbc,"images",$data,"img_id",$_POST['img_id']);
+        	$msg = "Image Updated Successfully";
+        	$sts = "success";
+			echo json_encode(array('msg' => $msg, 'sts' => $sts));
 			exit();
 		}
      }
@@ -32,21 +55,23 @@ if(isset($_POST['imagesData'])=="images"){
 				'contr_id'=>$_POST['contr_id'],
 			];
 			insert_data($dbc,"images",$data);
+        	$msg = "Image Added Successfully";
+        	$sts = "success";
+			echo json_encode(array('msg' => $msg, 'sts' => $sts));
 			exit();
      	}
   }
 }
 // Registor Contributor
-if(isset($_POST['registorData']) =="contributors"){
-	if ($_POST['captcha'] == $_SESSION["captcha_code"]) {
-		if ($_SESSION['captcha_code'] == $_POST['captcha']) {
+if(isset($_POST['contr_name1'])){
+	if ($_SESSION['captcha_code'] == $_POST['captcha']) {
 		$contr_otp = rand(100000,999999);
 		$email_body = "index.php?verify_user".$contr_otp;
-	 	$data=[
-		  	'contr_name' => $_POST['contr_name'],
-		  	'contr_email' => $_POST['contr_email'],
-		  	'contr_pass' => $_POST['contr_pass'],
-		  	'contr_otp' => $contr_otp
+		$data=[
+			'contr_name' => $_POST['contr_name1'],
+			'contr_email' => $_POST['contr_email'],
+			'contr_pass' => $_POST['contr_pass'],
+			'contr_otp' => $contr_otp
 		];
 		if(insert_data($dbc,"contributors",$data)){
 			$id = mysqli_insert_id($dbc);
@@ -54,7 +79,7 @@ if(isset($_POST['registorData']) =="contributors"){
 			$subject = "Verification Email";
 			$newID = md5($id);
 			$_SESSION['verify_contributor_email'] = $newID;
-			$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/contributor_verify.php?contr_id=".$id."&contr_code=".$newID;
+			$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."../contributor_verify.php?contr_id=".$id."&contr_code=".$newID;
 			$body = "Hi, This is account verification email send by Image Shop "."<a href='".$url."'>Click Here to Verify</a>";
 			$headers = "Content-Type: text/html; charset=ISO-8859-1\r\n";
 			$headers .= "From: Company Name";
@@ -64,23 +89,26 @@ if(isset($_POST['registorData']) =="contributors"){
 			if (update_data($dbc, "contributors", $data1, "contr_id", $id)) {
 				if (mail($to_email, $subject, $body, $headers)) {
 				    $msg =  "A verification is Sent to your Email $to_email Click URL to Get Verified...";
-					$sts = "danger";
+					$sts = "success";
+					echo json_encode(array('msg' => $msg, 'sts' => $sts));
 				} else {
 					$msg = mysqli_error($dbc);
 					$sts = "danger";
+					echo json_encode(array('msg' => $msg, 'sts' => $sts));
 				}
 			}
 		}else{
 			$msg = mysqli_error($dbc);
 			$sts = "danger";
+			echo json_encode(array('msg' => $msg, 'sts' => $sts));
 		}
 	}else{
-		$msg = "Capture Error! Not Matched Try Again";
+		$msg = "Captcha Error";
 		$sts = "danger";
+		echo json_encode(array('msg' => $msg, 'sts' => $sts));
 	}
-	}
-	exit();
 }
+
 // Delete Data 
  if(isset($_POST['deleteid'])){
 	$id=$_POST['deleteid'];
@@ -118,15 +146,18 @@ if (isset($_POST['contr_id'])) {
 	}
 }
 
-if (isset($_REQUEST['contr_name'])){
+if (isset($_POST['contr_name'])){
 	$data = [
-		'contr_name'=>$_REQUEST['contr_name'],
-		'contr_email'=>$_REQUEST['contr_email'],
-		'contr_pass'=>$_REQUEST['contr_pass'],
-		'contr_name' => $_REQUEST['contr_name'],
-		'contr_age' => $_REQUEST['contr_age'],
-		'contr_desc' => $_REQUEST['contr_desc'],
+		'contr_name'=>$_POST['contr_name'],
+		'contr_email'=>$_POST['contr_email'],
+		'contr_pass'=>$_POST['contr_pass'],
+		'contr_name' => $_POST['contr_name'],
+		'contr_age' => $_POST['contr_age'],
+		'contr_desc' => $_POST['contr_desc'],
 	];
 	update_data($dbc,"contributors",$data,"contr_id",$_POST['contr_id2']); 
+	$msg = "Contributor Updated Successfully";
+	$sts = "success";
+	echo json_encode(array('msg' => $msg, 'sts' => $sts));
 	exit();
 }//main..... 

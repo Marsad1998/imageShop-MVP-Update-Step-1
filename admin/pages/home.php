@@ -16,7 +16,7 @@
 				  		$a = $fetchadmin['admin_img'];
 				  	}
 				  ?>
-                  <img id="blah" src="uploads/<?=$a?>" class="img-responsive" style="width: 100%" alt="Invalid Image Type Click To Change">
+                  <img id="blah" src="uploads/<?=$a?>" class="img-responsive" style="width: 100%" alt="No Image Uploaded Yet Click here to Upload">
 				</p>
 			</div>
 			<div class="card-footer">

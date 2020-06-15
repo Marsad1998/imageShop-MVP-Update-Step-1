@@ -1,5 +1,4 @@
 <?php include_once '../connect/db.php'; ?>
-<?php include 'php/singup.php'; ?>
 <?php if(isset($_SESSION['contr_login'])): 
     redirect("index.php", 2000);
 ?>
@@ -15,13 +14,11 @@
             <div class="row">
                 <div class="col-md-4"></div><!--cSol-md 4-->
                 <div class="col-md-4 jumbotron">
-                    <form action="" method="POST">
-                        <p class="login-box-msg text-center">
-                        	<span id="msge" class="alert"></span>
-                        </p>
+                    <form action="" method="POST" id="formData">
+                        <div class="msg"></div> 
                         <div class="form-group ">
                             <label for="">Email:</label>
-                            <input type="text" placeholder="Email" name="contr_email" class="form-control">
+                            <input type="text" placeholder="Email" name="contr_email2" class="form-control">
                         </div><!--form group-->
                         <br>
                         <div class="form-group">

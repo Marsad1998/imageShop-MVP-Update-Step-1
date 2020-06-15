@@ -12,7 +12,7 @@
 				<a class="nav-link" href="index.php?nav=contr_add_img">Add Images</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Link 2</a>
+				<a class="nav-link" href="#">Earning</a>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>

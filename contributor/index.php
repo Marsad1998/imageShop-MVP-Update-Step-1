@@ -1,8 +1,6 @@
-<?php include 'php/singup.php'; ?>
-<?php if(!isset($_SESSION['contr_login'])):
- header('login.php');
-?>
 <?php include_once '../connect/db.php'; ?>
+<?php if (!isset($_SESSION['contr_login'])): redirect("login.php")?>
+<?php else: ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

@@ -1,8 +1,6 @@
-<?php include 'php/adminsingup.php'; ?>
-<?php if(!isset($_SESSION['admin_login'])):
- header('login.php');
-?>
 <?php include_once '../connect/db.php'; ?>
+<?php if (!isset($_SESSION['admin_login'])): redirect("login.php")?>
+<?php else: ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

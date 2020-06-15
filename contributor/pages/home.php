@@ -1,7 +1,7 @@
 <?php 
 $fetchcontr = mysqli_fetch_assoc(mysqli_query($dbc,"SELECT * FROM contributors WHERE contr_email = '$_SESSION[contr_login]'"));
 ?>
-	<span class="msge" class="alert"></span>
+	<span class="msg"></span>
    <div class="row">
 		<div class="col-sm-3">
 			<div class="card">
