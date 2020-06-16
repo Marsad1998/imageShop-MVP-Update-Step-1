@@ -37,10 +37,11 @@ if (isset($_POST['removeImage'])){
 		foreach($_SESSION["shopping_cart"] as $key => $value) {
 		    if($_POST["img_id2"] == $key){
 				unset($_SESSION["shopping_cart"][$key]);
-				$status = "<div class='alert alert-info' style='color:red;'>Product is removed from your cart!</div>";
+				echo $status = "<div class='alert alert-warning'>Product is removed from your cart!</div>";
 		    }
 		    if(empty($_SESSION["shopping_cart"])){
 		    	unset($_SESSION["shopping_cart"]);
+			    redirect("index.php", 2000);
 		    }
 		} 
 	}

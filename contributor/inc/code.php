@@ -79,7 +79,7 @@ if(isset($_POST['contr_name1'])){
 			$subject = "Verification Email";
 			$newID = md5($id);
 			$_SESSION['verify_contributor_email'] = $newID;
-			$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."../contributor_verify.php?contr_id=".$id."&contr_code=".$newID;
+			$url = $_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."contributor_verify.php?contr_id=".$id."&contr_code=".$newID;
 			$body = "Hi, This is account verification email send by Image Shop "."<a href='".$url."'>Click Here to Verify</a>";
 			$headers = "Content-Type: text/html; charset=ISO-8859-1\r\n";
 			$headers .= "From: Company Name";

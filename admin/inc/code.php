@@ -25,15 +25,23 @@ if(isset($_POST['cateData'])=="categories"){
 	 'cate_name'=> $_POST['cate_name'],
 	 'cate_sts' => $_POST['cate_sts'],
 	  ];
-	  update_data($dbc,"categories",$data,"cate_id",$_POST['cate_id']);
-    exit();
+	  if (update_data($dbc,"categories",$data,"cate_id",$_POST['cate_id'])) {
+      $msg = "Category Updated Successfully";
+      $sts = "success";   
+      echo json_encode(array('msg' => $msg, 'sts' => $sts));
+      exit();
+    }
   }else{
   $data = [
 	 'cate_name'=> $_POST['cate_name'],
 	 'cate_sts' => $_POST['cate_sts'],
 	];
-	insert_data($dbc,"categories",$data);
+  if (insert_data($dbc,"categories",$data)) {	
+    $msg = "Category Inserted Successfully";
+    $sts = "success";   
+    echo json_encode(array('msg' => $msg, 'sts' => $sts));
   exit();
+  }
   }
 }
 if(isset($_POST['brandData'])=="brands"){

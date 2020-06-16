@@ -4,7 +4,7 @@
 	<div class="card-body">
 		<h4 class="card-title">Add Images</h4>
 		<p class="card-text">
-					<span id="msge" class="alert"></span>
+					<span class="msg"></span>
 			<div class="row">
 				<div class="col-sm-6">
 					<form action="" method="POST" id="formData">

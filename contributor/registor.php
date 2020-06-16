@@ -7,7 +7,7 @@
 <body>
 	<br><br><br>
 	<div class="container">
-		<span id="msg" class="alert"></span>
+		<span class="msg" class="alert"></span>
 		<div class="row">
 		<div class="col-md-4"></div>
 		<div class="col-md-4 jumbotron">
@@ -16,7 +16,6 @@
 				<div class="form-group">
 					<label for="" class="control-label">Name</label>
 					<input type="text" class="form-control" name="contr_name1" required="">
-					<!-- <input type="hidden" name="registorData" id="registorData" value="contributors"> -->
 				</div><!--form groupp-->
 				<div class="form-group">
 					<label for="" class="control-label">Email</label>
