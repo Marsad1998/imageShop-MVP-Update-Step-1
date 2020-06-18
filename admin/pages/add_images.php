@@ -11,9 +11,6 @@
 						<div class="form-group">
 							<label for="">Images Title</label>
 							<input type="text" class="form-control img_title" name="img_title" required="" id="img_title">
-							 <!--hidden fileds To Insert Data-->
-					          <input type="hidden" class="form-control" name="imagesData" id="imagesData" value="images">
-					          <!-- <input type="hidden" class="form-control" name="contr_id" id="contr_id"> -->
 						   </div>
 						<div class="form-group">
 							<label for="">Image Description</label>
@@ -95,7 +92,12 @@
 						<tbody>
 							<?php
 								$x = 1;
-								$q = get($dbc,"images");
+								@$id = $_GET['contr_id'];
+								if ($id == "") {
+									$q = get($dbc,"images");
+								}else{
+									$q = get($dbc,"images WHERE contr_id = $id");
+								}
 								while ($r = mysqli_fetch_assoc($q)):?>
 							<tr>
 								<td><?=$x?></td>

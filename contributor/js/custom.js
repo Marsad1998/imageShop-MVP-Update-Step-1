@@ -16,6 +16,9 @@ $(document).ready(function(){
       $('#formData').css("opacity","0.5");
       },
       success:function (msg) {
+        if (msg.msg == "Login Successfully") {
+          window.location.href = "../contributor/";
+        }
       $('#formData')[0].reset();
       $('.msg').text(msg.msg).addClass("alert alert-"+msg.sts).fadeIn(6000).fadeOut(6000);
       // $('#msg').text(msg.msg).addClass("alert alert-"+msg.sts).fadeIn(6000).fadeOut(6000);
@@ -150,13 +153,13 @@ function DeleteData(deleteid){
     confirmButtonText: 'Yes, Delete it!',
     showLoaderOnConfirm: true,
     preConfirm:function(data){
-    console.log(data);
     $.ajax({
      url:'inc/code.php',
      method:'POST',
      data:{deleteid:deleteid,tbl2:tbl,col2:col},
+     dataType: 'json',
      succes:function(deleteid){
-        console.log(deleteid);  
+        $('.msg').text(msg.msg).addClass("alert alert-"+msg.sts).fadeIn(6000).fadeOut(6000);
        }// success function
        });// ajax cal
      $("#Reload").load('index.php?nav='+reloadPage+' #Reload');     

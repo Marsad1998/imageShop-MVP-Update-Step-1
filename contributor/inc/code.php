@@ -21,46 +21,82 @@ if (isset($_POST['contr_email2'])) {
 // UpDate Fetch Teachers Data 
 @$fetchcontr = mysqli_fetch_assoc(mysqli_query($dbc,"SELECT * FROM contributors WHERE contr_email = '$_SESSION[contr_login]'"));
 
-if(isset($_POST['imagesData'])=="images"){
+if(isset($_POST['img_title'])){
 	if($_POST['img_id'] != ""){
-		if (upload_pic($_FILES['img_file'], "../uploads/")) {
-		$data = [
-			'img_title'=> $_POST['img_title'],
-			'img_description' => $_POST['img_description'],
-			'img_price'=> $_POST['img_price'],
-			'img_file'=> $_SESSION['pic_name'],
-			'cate_id' =>  $_POST['cate_id'],
-			'brand_id'=>  $_POST['brand_id'],
-			'img_sts'=> 0,
-		];
-			$previousImage = fetchRecord($dbc, "images", "img_id", $_POST['img_id'])['img_file'];
-			unlink("../uploads/".$previousImage);
-			update_data($dbc,"images",$data,"img_id",$_POST['img_id']);
-        	$msg = "Image Updated Successfully";
-        	$sts = "success";
-			echo json_encode(array('msg' => $msg, 'sts' => $sts));
-			exit();
-		}
-     }
-     else{
-     	if (upload_pic($_FILES['img_file'], "../uploads/")) {
-		    $data = [
+		if (!empty($_FILES['img_file']['name'])) {
+			if (upload_pic($_FILES['img_file'], "../uploads/")) {
+			$data = [
+				'img_title'=> $_POST['img_title'],
+				'img_description' => $_POST['img_description'],
+				'img_price'=> $_POST['img_price'],
+				'img_file'=> $_SESSION['pic_name'],
+				'cate_id' =>  $_POST['cate_id'],
+				'brand_id'=>  $_POST['brand_id'],
+				'img_sts'=> 0,
+			];
+				$previousImage = fetchRecord($dbc, "images", "img_id", $_POST['img_id'])['img_file'];
+				unlink("../uploads/".$previousImage);
+				if (update_data($dbc,"images",$data,"img_id",$_POST['img_id'])) {
+		        	$msg = "Image Updated Successfully";
+		        	$sts = "success";
+					echo json_encode(array('msg' => $msg, 'sts' => $sts));
+					exit();
+				}
+			}
+		}else{
+			$data = [
 				'img_title'=> $_POST['img_title'],
 				'img_description' => $_POST['img_description'],
 				'img_price'=> $_POST['img_price'],
 				'cate_id' =>  $_POST['cate_id'],
 				'brand_id'=>  $_POST['brand_id'],
-				'img_file'=> $_SESSION['pic_name'],
 				'img_sts'=> 0,
-				'contr_id'=>$_POST['contr_id'],
 			];
-			insert_data($dbc,"images",$data);
-        	$msg = "Image Added Successfully";
-        	$sts = "success";
-			echo json_encode(array('msg' => $msg, 'sts' => $sts));
-			exit();
+			if (update_data($dbc,"images",$data,"img_id",$_POST['img_id'])) {
+		        $msg = "Image Updated Successfully";
+		        $sts = "success";
+				echo json_encode(array('msg' => $msg, 'sts' => $sts));
+				exit();
+			}
+		}
+    }else{
+     	if (!empty($_FILES['img_file']['name'])) {
+	     	if (upload_pic($_FILES['img_file'], "../uploads/")) {
+			    $data = [
+					'img_title'=> $_POST['img_title'],
+					'img_description' => $_POST['img_description'],
+					'img_price'=> $_POST['img_price'],
+					'cate_id' =>  $_POST['cate_id'],
+					'brand_id'=>  $_POST['brand_id'],
+					'img_file'=> $_SESSION['pic_name'],
+					'img_sts'=> 0,
+					'contr_id'=>$_POST['contr_id1'],
+				];
+				if(insert_data($dbc,"images",$data)){
+		        	$msg = "Image Added Successfully";
+		        	$sts = "success";
+					echo json_encode(array('msg' => $msg, 'sts' => $sts));
+					exit();
+				}
+	     	}
+     	}else{
+     		$data = [
+				'img_title'=> $_POST['img_title'],
+				'img_description' => $_POST['img_description'],
+				'img_price'=> $_POST['img_price'],
+				'cate_id' =>  $_POST['cate_id'],
+				'brand_id'=>  $_POST['brand_id'],
+				'img_sts'=> 0,
+				'contr_id'=>$_POST['contr_id1'],
+			];
+			if(insert_data($dbc,"images",$data)){
+		        $msg = "Image Added Successfully";
+		        $sts = "success";
+				echo json_encode(array('msg' => $msg, 'sts' => $sts));
+				exit();
+			}
      	}
-  }
+    }
 }
 // Registor Contributor
 if(isset($_POST['contr_name1'])){
@@ -116,8 +152,12 @@ if(isset($_POST['contr_name1'])){
 	$fld=$_POST['col2'];
     $previousImage = fetchRecord($dbc, "images", "img_id", $id)['img_file'];
 	unlink("../uploads/".$previousImage);
-	deleteFromTable($dbc,$table,$fld,$id);
-	exit();
+	if (deleteFromTable($dbc,$table,$fld,$id)) {
+		$msg = "Deleted ";
+		$sts = "info";
+		echo json_encode(array('msg' => $msg, 'sts' => $sts));
+		exit();
+	}
 }
 // Edit Pururse data
 //Getting Data For Edit Pupose

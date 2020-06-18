@@ -78,8 +78,9 @@ if (isset($_POST['removeImage'])){
 				<?php
 					$total += $product['price'];
 				}
-				$title = "cart_item";
-				$cart_item1 = json_encode($_SESSION["shopping_cart"]);
+				$title = "cart_items";
+				// $cart_item1 = "20";
+				$cart_item1 = json_encode($_SESSION['shopping_cart']);
 				?>
 				<tr>
 					<td></td>

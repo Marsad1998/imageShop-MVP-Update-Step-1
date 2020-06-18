@@ -8,17 +8,24 @@
 			<li class="nav-item active">
 				<a class="nav-link" href="index.php?nav=home">Home <span class="sr-only">(current)</span></a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="index.php?nav=add_categories">Categories</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="index.php?nav=brands">Brands</a>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Basic Modules</a>
+				<div class="dropdown-menu" aria-labelledby="dropdown01">
+					<a class="dropdown-item" href="index.php?nav=add_categories">Categories</a>
+					<a class="dropdown-item" href="index.php?nav=brands">Brands</a>
+					<a class="dropdown-item" href="index.php?nav=add_images">Manage Image</a>
+				</div>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="index.php?nav=contributors">Contributors</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="index.php?nav=add_images">Add image</a>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</a>
+				<div class="dropdown-menu" aria-labelledby="dropdown01">
+					<a class="dropdown-item" href="index.php?nav=overall_orders">Overall Orders</a>
+					<a class="dropdown-item" href="index.php?nav=">Contributors Ledger</a>
+					<a class="dropdown-item" href="index.php?nav=add_images">Earning Summary</a>
+				</div>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>

@@ -19,7 +19,6 @@ $(document).ready(function(){
       $('#formData').css("opacity","0.5");
       },
       success:function (msg) {
-        console.log(msg)
         if (msg.msg == "Login Successfully") {
           window.location.href = "../admin/";
         }
@@ -123,6 +122,7 @@ function DeleteData(deleteid){
      method:'POST',
      data:{deleteid:deleteid,tbl2:tbl,col2:col},
      succes:function(deleteid){  
+        $('.msg').text(msg.msg).addClass("alert alert-"+msg.sts).fadeIn(6000).fadeOut(6000);
      }// success function
      });// ajax cal
      $("#Reload").load('index.php?nav='+reloadPage+' #Reload');     

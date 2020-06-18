@@ -59,7 +59,10 @@ Total Images : <span class="badge badge-secondary float-right"><?=$a = countWhen
 Total Approved : <span class="badge badge-secondary float-right"><?=countWhens($dbc, "images", "contr_id", $r['contr_id'], "img_sts", 1);?></span><br>Total Pending : <span class="badge badge-secondary float-right"><?=countWhens($dbc, "images", "contr_id", $r['contr_id'], "img_sts", 0);?></span>
 								</td>
 								<td><?=isActive($r['contr_sts'])?></td>
-								<td><a href="index.php?nav=contributors&contr_id=<?=$r['contr_id']?>" class="text-primary" class="approveImages" id="">Edit</a></td>
+								<td>
+						<a href="index.php?nav=contributors&contr_id=<?=$r['contr_id']?>" class="text-primary" class="approveImages" id="">Edit</a> |
+						<a href="index.php?nav=add_images&contr_id=<?=$r['contr_id']?>" class="text-primary" class="approveImages" id="">Approve Images</a>
+								</td>
 								<!-- <td><a href="index.php?nav=brands&edit_brand_id=<?=$r['brand_id']?>">Edit</a> | <a href="index.php?nav=brands&del_brand_id=<?=$r['brand_id']?>">Delete</a></td> -->
 							</tr>
 							<?php 

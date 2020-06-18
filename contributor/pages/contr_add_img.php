@@ -14,8 +14,6 @@
 						<div class="form-group">
 							<label for="">Images Title</label>
 							<input type="text" class="form-control img_title" name="img_title" required="" id="img_title">
-					          <input type="hidden" class="form-control" name="imagesData" id="imagesData" value="images">
-					          <input type="hidden" class="form-control" name="contr_id" id="contr_id">
 						   </div>
 						<div class="form-group">
 							<label for="">Image Description</label>
@@ -61,9 +59,9 @@
 						<?php $email=$_SESSION['contr_login']; 
 						$query = getWhere($dbc,"contributors","contr_email",$email);
 						$row = mysqli_fetch_assoc($query);?>
-						<input hidden="" type="text" class="form-control" name="contr_id" id="contr_id" value="<?=$row['contr_id']?>">
+						<input hidden="" type="text" class="form-control" name="contr_id1" id="contr_id" value="<?=$row['contr_id']?>">
 					</div>
-					<input type="hidden" id="img_id" name="img_id"> 
+					<input type="" id="img_id" name="img_id"> 
 					<button type="submit" id="saveData" name="image_data" class="btn btn-primary">Save</button>
 				</div>
 			   </form>

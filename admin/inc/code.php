@@ -50,15 +50,24 @@ if(isset($_POST['brandData'])=="brands"){
    'brand_name'=> $_POST['brand_name'],
    'brand_sts' => $_POST['brand_sts'],
     ];
-    update_data($dbc,"brands",$data,"brand_id",$_POST['brand_id']);
-     }
-     else{
-     $data = [
-   'brand_name'=> $_POST['brand_name'],
-   'brand_sts' => $_POST['brand_sts'],
-  ];
-  insert_data($dbc,"brands",$data);
-  exit();
+    if (update_data($dbc,"brands",$data,"brand_id",$_POST['brand_id'])) {
+      $msg = "Brands Updated Successfully";
+      $sts = "success";   
+      echo json_encode(array('msg' => $msg, 'sts' => $sts));
+    }
+  }
+  else{
+   $data = [
+     'brand_name'=> $_POST['brand_name'],
+     'brand_sts' => $_POST['brand_sts'],
+    ];
+    if (insert_data($dbc,"brands",$data)) {
+      $msg = "Brands Inserted Successfully";
+      $sts = "success";   
+      echo json_encode(array('msg' => $msg, 'sts' => $sts));
+    }
+    
+    exit();
   }
 }
 
@@ -77,8 +86,12 @@ if (isset($_POST['admin_id2'])) {
   $id=$_POST['deleteid'];
   $table=$_POST['tbl2'];
   $fld=$_POST['col2'];
-  deleteFromTable($dbc,$table,$fld,$id);
-  exit();
+  if (deleteFromTable($dbc,$table,$fld,$id)) {
+    $msg = "Data Deleted Successfully";
+    $sts = "success";
+    echo json_encode(array('msg' => $msg, 'sts' => $sts));
+    exit();
+  }
 }
 //Edit Data
 if (isset($_POST['edit_id']) && isset($_POST['edit_id']) != ""){
@@ -93,40 +106,79 @@ if (isset($_POST['edit_id']) && isset($_POST['edit_id']) != ""){
  }
 }
 // Imge Data
-if(isset($_POST['imagesData'])=="images"){
+if(isset($_POST['img_title'])){
   if($_POST['img_id'] != ""){
-    if (upload_pic($_FILES['img_file'], "../uploads/")) {  
-    $data = [
-      'img_title'=> $_POST['img_title'],
-      'img_description' => $_POST['img_description'],
-      'img_price'=> $_POST['img_price'],
-      'cate_id' =>  $_POST['cate_id'],
-      'brand_id'=>  $_POST['brand_id'],
-      'img_sts'=>$_POST['img_sts'],
-      'img_file'=>  $_SESSION['pic_name'],
-    ];
-    if (update_data($dbc,"images",$data,"img_id",$_POST['img_id'])) {
-      echo 'Data Updated Successfully';
-    }
-    exit();
+    if (!empty($_FILES['img_file']['name'])) {
+      if (upload_pic($_FILES['img_file'], "../uploads/")) {  
+        $data = [
+          'img_title'=> $_POST['img_title'],
+          'img_description' => $_POST['img_description'],
+          'img_price'=> $_POST['img_price'],
+          'cate_id' =>  $_POST['cate_id'],
+          'brand_id'=>  $_POST['brand_id'],
+          'img_sts'=>$_POST['img_sts'],
+          'img_file'=>  $_SESSION['pic_name'],
+        ];
+        if (update_data($dbc,"images",$data,"img_id",$_POST['img_id'])) {
+            $msg = "Image With Data Inserted Successfully";
+            $sts = "success";
+            echo json_encode(array('msg' => $msg, 'sts' => $sts));
+        }
+        exit();
+      }
+    }else{
+      $data = [
+          'img_title'=> $_POST['img_title'],
+          'img_description' => $_POST['img_description'],
+          'img_price'=> $_POST['img_price'],
+          'cate_id' =>  $_POST['cate_id'],
+          'brand_id'=>  $_POST['brand_id'],
+          'img_sts'=>$_POST['img_sts'],
+        ];
+        if (update_data($dbc,"images",$data,"img_id",$_POST['img_id'])) {
+            $msg = "Image without Data Inserted Successfully";
+            $sts = "success";
+            echo json_encode(array('msg' => $msg, 'sts' => $sts));
+        }
+        exit();
     }
   }else{
-    if (upload_pic($_FILES['img_file'], "../uploads/")) {
-    $data = [
-      'img_title'=> $_POST['img_title'],
-      'img_description' => $_POST['img_description'],
-      'img_price'=> $_POST['img_price'],
-      'cate_id' =>  $_POST['cate_id'],
-      'brand_id'=>  $_POST['brand_id'],
-      'img_file'=>  $_SESSION['pic_name'],
-      'img_sts'=>   $_POST['img_sts'],
-      'admin_id'=>  $_POST['admin_id'],
-    ];
-      if (insert_data($dbc,"images",$data)) {
-        echo 'Data Inserted Successfully';
+    if (!empty($_FILES['img_file']['name'])) {
+      if (upload_pic($_FILES['img_file'], "../uploads/")) {
+      $data = [
+        'img_title'=> $_POST['img_title'],
+        'img_description' => $_POST['img_description'],
+        'img_price'=> $_POST['img_price'],
+        'cate_id' =>  $_POST['cate_id'],
+        'brand_id'=>  $_POST['brand_id'],
+        'img_file'=>  $_SESSION['pic_name'],
+        'img_sts'=>   $_POST['img_sts'],
+        'admin_id'=>  $_POST['admin_id'],
+      ];
+        if (insert_data($dbc,"images",$data)) {
+          $msg = "Image Updated Successfully";
+          $sts = "success";
+          echo json_encode(array('msg' => $msg, 'sts' => $sts));
+        }
+        exit();
       }
+    }else{
+      $data = [
+        'img_title'=> $_POST['img_title'],
+        'img_description' => $_POST['img_description'],
+        'img_price'=> $_POST['img_price'],
+        'cate_id' =>  $_POST['cate_id'],
+        'brand_id'=>  $_POST['brand_id'],
+        'img_sts'=>   $_POST['img_sts'],
+        'admin_id'=>  $_POST['admin_id'],
+      ];
+        if (insert_data($dbc,"images",$data)) {
+          $msg = "Data Updated Successfully";
+          $sts = "success";
+          echo json_encode(array('msg' => $msg, 'sts' => $sts));
+        }
+        exit();
     }
-    exit();
   }
 }
 
@@ -136,7 +188,11 @@ if (isset($_POST['admin_name'])) {
       'admin_email' => $_POST['admin_email'],
       'admin_pass' => $_POST['admin_pass'],
     ];
-    update_data($dbc,"admins",$data,"admin_id",$_POST['admin_id']);
+    if (update_data($dbc,"admins",$data,"admin_id",$_POST['admin_id'])) {
+      $msg = "Admin Data Updated Successfully";
+      $sts = "success";
+      echo json_encode(array('msg' => $msg, 'sts' => $sts));
+    }
   exit();
 }
 
