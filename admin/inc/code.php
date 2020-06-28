@@ -19,7 +19,7 @@ if (isset($_POST['admin_email1'])) {
 }
 
 // UpDate Fetch Teachers Data 
-if(isset($_POST['cateData'])=="categories"){
+if(isset($_POST['cate_name'])){
   if($_POST['cate_id'] != ""){
 	 $data = [
 	 'cate_name'=> $_POST['cate_name'],
@@ -44,14 +44,16 @@ if(isset($_POST['cateData'])=="categories"){
   }
   }
 }
-if(isset($_POST['brandData'])=="brands"){
+
+//Subcategories / Brand 
+if(isset($_POST['brand_name'])){
   if($_POST['brand_id'] != ""){
    $data = [
    'brand_name'=> $_POST['brand_name'],
    'brand_sts' => $_POST['brand_sts'],
     ];
     if (update_data($dbc,"brands",$data,"brand_id",$_POST['brand_id'])) {
-      $msg = "Brands Updated Successfully";
+      $msg = "Sub Category Updated Successfully";
       $sts = "success";   
       echo json_encode(array('msg' => $msg, 'sts' => $sts));
     }
@@ -62,7 +64,7 @@ if(isset($_POST['brandData'])=="brands"){
      'brand_sts' => $_POST['brand_sts'],
     ];
     if (insert_data($dbc,"brands",$data)) {
-      $msg = "Brands Inserted Successfully";
+      $msg = "Sub Category Inserted Successfully";
       $sts = "success";   
       echo json_encode(array('msg' => $msg, 'sts' => $sts));
     }
@@ -243,5 +245,32 @@ if (isset($_POST['admin_name1'])) {
 }
 
 @$fetchcontr = mysqli_fetch_assoc(mysqli_query($dbc,"SELECT * FROM admins WHERE admin_email = '$_SESSION[admin_login]'"));
+
+//Subcategories / Brand 
+if(isset($_POST['promo_name'])){
+  $data = [
+    'promo_name'=> $_POST['promo_name'],
+    'promo_date'=> $_POST['promo_date'],
+    'promo_sts' => $_POST['promo_sts'],
+    'promo_type'=>$_POST['promo_type'],
+    'promo_amt'=>$_POST['promo_amt'],
+    'promo_valid_amt'=>$_POST['promo_valid_amt'],
+  ];
+  if($_POST['promo_id'] != ""){
+    if (update_data($dbc,"promos",$data,"promo_id",$_POST['promo_id'])) {
+      $msg = "Promos Updated Successfully";
+      $sts = "success";   
+      echo json_encode(array('msg' => $msg, 'sts' => $sts));
+    }
+  }
+  else{
+    if (insert_data($dbc,"promos",$data)) {
+      $msg = "Promos Inserted Successfully";
+      $sts = "success";   
+      echo json_encode(array('msg' => $msg, 'sts' => $sts));
+    }  
+  }
+  exit();
+}
 
 ?>

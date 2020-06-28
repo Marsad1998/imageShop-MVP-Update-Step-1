@@ -2,6 +2,7 @@ $(document).ready(function(){
   $(document).on('click','#approveImages',function(){
     alert()
   });
+
   //Save Data into Database
   $("#formData").on('submit',function(e){
    var reloadPage = $("#reloadPage").val();
@@ -64,7 +65,6 @@ $(document).on('click','.update',function () {
     data:{edit_id:edit_id, tbl1:tbl, col1:col},
     dataType:"json",
     success:function(data){
-     console.log(data);
     if (tbl == "categories"){
       $("#cate_id").val(data.cate_id);
       $("#cate_name").val(data.cate_name);
@@ -90,6 +90,12 @@ $(document).on('click','.update',function () {
       $('#blah').attr('src', src+data.img_file);
       $('#brand_id  option[value="'+data.brand_id+'"]').prop("selected", true);
       $('#img_sts  option[value="'+data.img_sts+'"]').prop("selected", true);
+      $("#saveData").text("Update").removeClass("btn-primary").addClass("btn-info");
+    }else if (tbl == 'promos') {
+      $("#promo_id").val(data.promo_id);
+      $("#promo_name").val(data.promo_name);
+      $("#promo_date").val(data.promo_date);
+      $('#promo_sts  option[value="'+data.promo_sts+'"]').prop("selected", true);
       $("#saveData").text("Update").removeClass("btn-primary").addClass("btn-info");
     }
     else{} // else part.
@@ -121,6 +127,7 @@ function DeleteData(deleteid){
      url:'inc/code.php',
      method:'POST',
      data:{deleteid:deleteid,tbl2:tbl,col2:col},
+     dataType: 'json',
      succes:function(deleteid){  
         $('.msg').text(msg.msg).addClass("alert alert-"+msg.sts).fadeIn(6000).fadeOut(6000);
      }// success function

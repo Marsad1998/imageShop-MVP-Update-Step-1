@@ -7,3 +7,5 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- <script src="/custom/js/style.js"></script>	 -->
 <script src="js/custom.js"></script>
+<!-- Font Awesom -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>

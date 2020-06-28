@@ -4,12 +4,12 @@
 		<p class="card-text">
 			<div class="row">
 				<div class="col-sm-4">
-					<?php getMessage(@$msg, @$sts, 3000) ?>
 					<?php  
 						@$id = $_GET['contr_id'];
 						$fetchContr = fetchRecord($dbc, "contributors", "contr_id", $id);
 					?>
 					<form action="" method="POST" role="form">
+						<div class="msg"></div>
 						<div class="form-group">
 							<label for="">Sub Categories Name</label>
 							<input type="text" value="<?=@$fetchContr['contr_name']?>" class="form-control" name="contr_update_name" required=""> 

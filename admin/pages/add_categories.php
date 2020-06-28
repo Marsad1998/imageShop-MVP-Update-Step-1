@@ -6,12 +6,11 @@
 		<p class="card-text">
 			<div class="row">
 				<div class="col-sm-6">
-					<span id="msge" class="alert"></span>
+					<span id="msg"></span>
 					<form action="" method="POST" role="form" id="formData">
 						<div class="form-group">
 							<label for="">Categories Name</label>
 							<input type="text" class="form-control cate_name" name="cate_name" required="" id="cate_name"> 
-							  <input type="hidden" name="cateData" id="cateData" value="categories">
 						</div>
 						<div class="form-group">
 							<label for="">Status</label>
@@ -58,7 +57,6 @@
 				  </div><!--reload-->
 				</div><!-- col -->
 			</div><!-- row -->
-
 		</p>
 	</div>
 </div>

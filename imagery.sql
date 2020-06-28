@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2020 at 07:27 PM
+-- Generation Time: Jun 28, 2020 at 02:10 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.15
 
@@ -67,9 +67,11 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`brand_id`, `brand_name`, `brand_sts`, `brand_timestamp`) VALUES
-(1, 'apple', '1', '2020-06-06 00:50:56'),
-(2, 'logo', '1', '2020-06-06 00:51:24'),
-(3, 'kids', '1', '2020-06-06 00:51:31');
+(1, 'Apple', '1', '2020-06-06 00:50:56'),
+(2, 'Logo', '1', '2020-06-06 00:51:24'),
+(3, 'New', '1', '2020-06-06 00:51:31'),
+(4, 'Abc', '1', '2020-06-20 09:31:46'),
+(5, 'abc', '1', '2020-06-20 09:42:27');
 
 -- --------------------------------------------------------
 
@@ -90,10 +92,9 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`cate_id`, `cate_name`, `cate_sts`, `cate_timestamp`) VALUES
 (1, 'nature', '1', '2020-06-06 00:48:57'),
-(2, 'travel', '0', '2020-06-06 00:49:02'),
+(2, 'travel', '1', '2020-06-06 00:49:02'),
 (3, 'portrait', '1', '2020-06-06 00:49:07'),
-(4, 'art', '1', '2020-06-06 00:49:13'),
-(5, 'sun rise', '1', '2020-06-06 00:50:40');
+(4, 'art', '1', '2020-06-06 00:49:13');
 
 -- --------------------------------------------------------
 
@@ -157,7 +158,30 @@ INSERT INTO `images` (`img_id`, `img_title`, `img_description`, `img_price`, `ca
 (15, 'nature', 'abc', '120', '2', '2', '1', '9410612985ee225d1d82a8.jpg', '55', '5', '2020-06-11 12:23:41'),
 (21, 'levish', 'kb', '20', '1', '2', '1', '377305625eea04e18df14.jpg', '', '3', '2020-06-17 11:52:00'),
 (24, 'new', 'ygkhjn', '10', '1', '1', '1', '18034817735eeb2f3dd452a.jpg', '76', '', '2020-06-18 09:09:17'),
-(25, 'levish', 'yfgh', '10', '1', '1', '1', '6480449705eeb2fcf1c1a9.jpeg', '76', '', '2020-06-18 09:11:43');
+(25, 'levish', 'yfgh', '10', '1', '1', '1', '6480449705eeb2fcf1c1a9.jpeg', '76', '', '2020-06-18 09:11:43'),
+(26, 'cup', 'ihbjkn', '10', '3', '2', '1', '2879099705eecb755500e3.jpeg', '', '3', '2020-06-19 13:02:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order`
+--
+
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `item_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `item_number` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `item_price` float(10,2) NOT NULL,
+  `item_price_currency` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `paid_amount` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `paid_amount_currency` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `txn_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `payment_status` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -198,7 +222,22 @@ INSERT INTO `orders` (`order_id`, `order_sts`, `user_order`, `order_time`) VALUE
 (19, 2, 29, '2020-06-18 12:47:07'),
 (20, 2, 30, '2020-06-18 14:55:25'),
 (21, 2, 31, '2020-06-18 17:12:01'),
-(22, 2, 32, '2020-06-18 17:15:20');
+(22, 2, 32, '2020-06-18 17:15:20'),
+(23, 2, 0, '2020-06-20 16:54:38'),
+(24, 2, 0, '2020-06-20 16:56:41'),
+(25, 2, 0, '2020-06-20 17:18:51'),
+(26, 2, 0, '2020-06-20 17:43:41'),
+(27, 2, 0, '2020-06-20 17:54:49'),
+(28, 2, 0, '2020-06-20 17:55:48'),
+(29, 2, 0, '2020-06-20 18:26:20'),
+(30, 2, 9, '2020-06-20 18:32:25'),
+(31, 2, 34, '2020-06-20 18:38:37'),
+(32, 2, 9, '2020-06-20 18:48:44'),
+(33, 2, 9, '2020-06-20 18:52:38'),
+(34, 2, 9, '2020-06-20 18:54:41'),
+(35, 2, 9, '2020-06-21 20:55:28'),
+(36, 2, 9, '2020-06-21 21:03:30'),
+(37, 2, 9, '2020-06-21 21:14:52');
 
 -- --------------------------------------------------------
 
@@ -248,7 +287,27 @@ INSERT INTO `order_detail` (`order_detail_id`, `order_id`, `img_id`, `img_price`
 (27, 19, 21, 20, '2020-06-18 12:47:07'),
 (28, 20, 21, 20, '2020-06-18 14:55:25'),
 (29, 21, 21, 20, '2020-06-18 17:12:01'),
-(30, 22, 21, 20, '2020-06-18 17:15:20');
+(30, 22, 21, 20, '2020-06-18 17:15:20'),
+(31, 27, 21, 20, '2020-06-20 17:54:49'),
+(32, 27, 26, 10, '2020-06-20 17:54:49'),
+(33, 28, 21, 20, '2020-06-20 17:55:48'),
+(34, 28, 26, 10, '2020-06-20 17:55:48'),
+(35, 29, 21, 20, '2020-06-20 18:26:20'),
+(36, 29, 26, 10, '2020-06-20 18:26:20'),
+(37, 30, 21, 20, '2020-06-20 18:32:26'),
+(38, 30, 26, 10, '2020-06-20 18:32:26'),
+(39, 32, 21, 20, '2020-06-20 18:48:44'),
+(40, 32, 26, 10, '2020-06-20 18:48:44'),
+(41, 33, 21, 20, '2020-06-20 18:52:38'),
+(42, 33, 26, 10, '2020-06-20 18:52:38'),
+(43, 34, 21, 20, '2020-06-20 18:54:41'),
+(44, 34, 26, 10, '2020-06-20 18:54:41'),
+(45, 35, 21, 20, '2020-06-21 20:55:28'),
+(46, 35, 26, 10, '2020-06-21 20:55:28'),
+(47, 36, 21, 20, '2020-06-21 21:03:30'),
+(48, 36, 26, 10, '2020-06-21 21:03:30'),
+(49, 37, 21, 20, '2020-06-21 21:14:53'),
+(50, 37, 26, 10, '2020-06-21 21:14:53');
 
 -- --------------------------------------------------------
 
@@ -297,6 +356,32 @@ INSERT INTO `products` (`id`, `name`, `image`, `price`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `promos`
+--
+
+CREATE TABLE `promos` (
+  `promo_id` int(11) NOT NULL,
+  `promo_name` text NOT NULL,
+  `promo_date` date NOT NULL,
+  `promo_sts` text NOT NULL,
+  `promo_type` text NOT NULL,
+  `promo_amt` text NOT NULL,
+  `promo_valid_amt` text NOT NULL,
+  `promo_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `promos`
+--
+
+INSERT INTO `promos` (`promo_id`, `promo_name`, `promo_date`, `promo_sts`, `promo_type`, `promo_amt`, `promo_valid_amt`, `promo_time`) VALUES
+(3, 'covid', '2020-06-26', '1', 'per', '10', '25', '2020-06-21 20:55:05'),
+(5, 'newyear', '2020-06-20', '1', 'per', '10', '30', '2020-06-21 20:54:41'),
+(6, 'halloween', '2020-06-27', '1', 'fix', '20', '20', '2020-06-21 21:13:31');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -304,6 +389,7 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `password` text NOT NULL,
   `user_city` text NOT NULL,
   `user_state` text NOT NULL,
   `user_country` text NOT NULL,
@@ -316,29 +402,31 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `email`, `user_city`, `user_state`, `user_country`, `user_address`, `order_id`, `order_sts`) VALUES
-(9, 'admin', 'abc@abc', 'gujranwala', 'punjab', 'pakisatn', 'cgvjh', '', ''),
-(10, 'admin', 'abc@abc.ocm', 'gujranwala', 'punjab', 'pakisatn', 'xcgjvhk', '', ''),
-(11, 'admin', 'marsadakbar1@gmail.com', 'gujranwala', 'punjab', 'pakisatn', 'abc', '', ''),
-(12, 'admin', 'superadmin@gmail.com', 'gujranwala', 'punjab', 'pakisatn', 'dryfguh', '', ''),
-(13, 'new', 'new@an', 'abc', 'hkj', 'yghk', 'ikjb', '', ''),
-(14, 'admin', 'new@anaaa', 'ucgvjh', 'ujvhb', 'ucvjh', 'cvjh', '', ''),
-(15, 'admin', 'new@an46tyh', 'tfuygh', 'ufth', 'fyufyi', 'iyg', '', ''),
-(16, 'admin', 'abc@abcytcuvh', 'utfh', 'uyg ygh', 'i yh', 't ', '', ''),
-(17, 'admin', 'abc@abcughjfuygkh', 'ygkh', 'ybh', ' utygjh', 't ygj', '', ''),
-(18, 'admin', 'marsadakbar1@gmail.comtufgvjh', 'yg hb', 'yugh', 'tfuygh', 'uyh', '', ''),
-(21, 'new', 'new@new.com', 'kmk', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(22, 'admin', 'abc@abc.ocmaaa', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(23, 'ik', 'ik@ik.com', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(24, 'abc', 'k@k', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(25, 'a', 'a@a', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(26, 'admin', 'fdhgv@tfugvj', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(27, 'new', 'tyfgj@fgvjhb', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(28, 'gyh', 'ghj@vhjb', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(29, 'ftgh', 'fgjh@gvhb', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(30, 'chgvjhb', 'hfcgvj@chgvjmb', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(31, 'e5tyg', 'tfgjh@gfvhbmtfugjh', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
-(32, '6uy', 'tufygj@dhfjvh', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', '');
+INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `user_city`, `user_state`, `user_country`, `user_address`, `order_id`, `order_sts`) VALUES
+(9, 'admin', 'abc@abc.com', 'abc', 'gujranwala', 'punjab', 'pakisatn', 'cgvjh', '', ''),
+(10, 'admin', 'abc@abc.ocm', '', 'gujranwala', 'punjab', 'pakisatn', 'xcgjvhk', '', ''),
+(11, 'admin', 'marsadakbar1@gmail.com', 'ab', 'gujranwala', 'punjab', 'pakisatn', 'abc', '', ''),
+(12, 'admin', 'superadmin@gmail.com', '', 'gujranwala', 'punjab', 'pakisatn', 'dryfguh', '', ''),
+(13, 'new', 'new@an', '', 'abc', 'hkj', 'yghk', 'ikjb', '', ''),
+(14, 'admin', 'new@anaaa', '', 'ucgvjh', 'ujvhb', 'ucvjh', 'cvjh', '', ''),
+(15, 'admin', 'new@an46tyh', '', 'tfuygh', 'ufth', 'fyufyi', 'iyg', '', ''),
+(16, 'admin', 'abc@abcytcuvh', '', 'utfh', 'uyg ygh', 'i yh', 't ', '', ''),
+(17, 'admin', 'abc@abcughjfuygkh', '', 'ygkh', 'ybh', ' utygjh', 't ygj', '', ''),
+(18, 'admin', 'marsadakbar1@gmail.comtufgvjh', '', 'yg hb', 'yugh', 'tfuygh', 'uyh', '', ''),
+(21, 'new', 'new@new.com', '', 'kmk', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(22, 'admin', 'abc@abc.ocmaaa', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(23, 'ik', 'ik@ik.com', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(24, 'abc', 'k@k', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(25, 'a', 'a@a', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(26, 'admin', 'fdhgv@tfugvj', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(27, 'new', 'tyfgj@fgvjhb', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(28, 'gyh', 'ghj@vhjb', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(29, 'ftgh', 'fgjh@gvhb', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(30, 'chgvjhb', 'hfcgvj@chgvjmb', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(31, 'e5tyg', 'tfgjh@gfvhbmtfugjh', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(32, '6uy', 'tufygj@dhfjvh', '', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', ''),
+(33, '', '', '', '', '', '', '', '', ''),
+(34, 'marsadakbar', 'abc@abc.com1', 'abc', 'kamoke', 'punjab', 'pakistan', 'akbar marriage hall railway road kamoke', '', '');
 
 --
 -- Indexes for dumped tables
@@ -377,6 +465,12 @@ ALTER TABLE `images`
   ADD PRIMARY KEY (`img_id`);
 
 --
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -401,6 +495,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `promos`
+--
+ALTER TABLE `promos`
+  ADD PRIMARY KEY (`promo_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -421,13 +521,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `contributors`
@@ -439,19 +539,25 @@ ALTER TABLE `contributors`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `order`
+--
+ALTER TABLE `order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -466,10 +572,16 @@ ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `promos`
+--
+ALTER TABLE `promos`
+  MODIFY `promo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

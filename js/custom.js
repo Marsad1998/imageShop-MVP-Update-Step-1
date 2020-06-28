@@ -1,6 +1,62 @@
 $(document).ready(function(){
 	fetchContributor();
-});
+
+	$(document).on('keyup',"#promo",function(){
+		var promo = $("#promo").val();
+	    $.ajax({
+			url: 'inc/code.php',
+			type: 'POST',
+			data:{promo:promo},
+		    dataType: 'json',
+		    success:function(response){
+		    	console.log(response.flag)
+			    $("#promo").css('border-color', response.sts);
+			    $("#promo_txt").css('color', response.sts).text(response.msg);
+			    $("#promo_btn").attr("disabled", response.flag)
+		    }
+	  	});
+	});//keyup
+
+	//Promo Btn Disabled
+	// $("#promo_btn").attr("disabled",true)
+	//Login Form Hide 
+	$(".loginForm").hide();
+	//Checkout Form Hide 
+	// $("#paypalcheckout").hide();   
+
+	//Save Data into Database
+	$("#proceedForm").on('submit',function(e) {
+	    e.preventDefault();
+	    var form = $('#proceedForm');
+	    $.ajax({
+	        type: 'POST',
+	        url: form.attr('action'),
+	        data: new FormData(this),
+	        contentType: false,
+	        cache: false,
+	        processData: false,
+	        dataType: 'json',
+	        beforeSend:function() {
+	            $('#proceed').attr("disabled","disabled");
+	            $('#proceed').text("Loading...");
+	        },
+	        success:function (msg) {
+	            $('#proceed').text("Save");
+	            $(".msg").addClass("alert alert"+msg.sts).fadeIn(2000).fadeOut(4000);
+	            if (msg.msg == "Login Successfully") {
+          			window.location.href = "index.php?nav=cart";
+	            }
+	            $('#proceedForm').each(function(){
+	                this.reset();
+	            });
+	            $('#proceed').removeAttr("disabled");
+	            $('.proceedForm').hide();
+	            // $("#paypalcheckout").show();   
+	        }
+	    });//ajax call
+	});//main
+
+});//doucmnet readty
 
 function fetchContributor(){
   var check_contr = 'contr';
@@ -72,35 +128,6 @@ function fetchContributor(){
  	}); 	
  }
 
-$("#paypalcheckout").hide();   
-
-//Save Data into Database
-$("#proceedForm").on('submit',function(e) {
-    e.preventDefault();
-    var form = $('#proceedForm');
-    $.ajax({
-        type: 'POST',
-        url: form.attr('action'),
-        data: new FormData(this),
-        contentType: false,
-        cache: false,
-        processData: false,
-        beforeSend:function() {
-            $('#proceed').attr("disabled","disabled");
-            $('#proceed').text("Loading...");
-        },
-        success:function (msg) {
-            $('#proceed').text("Save");
-            $('#proceedForm').each(function(){
-                this.reset();
-            });
-            $('#proceed').removeAttr("disabled");
-            $('.proceedForm').hide();
-            $("#paypalcheckout").show();   
-        }
-    });//ajax call
-});//main
-
 //  document.getElementById("box").oninput=function(){
 //     for (var i=0;i<document.getElementsByClassName("name").length;i++) {
 //         if (document.getElementsByClassName("name")[i].innerHTML.match(new RegExp(document.getElementById("box").value, "gi"))) {
@@ -126,3 +153,12 @@ $("#box").on('keyup', function(){
 //         }
 //     }
 // }
+
+function loginLoad(){
+	$(".loginForm").show();
+	$(".proceedForm").hide();
+}
+function registerForm() {
+	$(".loginForm").hide();
+	$(".proceedForm").show();
+}

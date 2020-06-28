@@ -6,7 +6,7 @@
 		<p class="card-text">
 			<div class="row">
 				<div class="col-sm-6">
-					<span id="msge" class="alert"></span>
+					<span id="msg"></span>
 					<form action="" method="POST" role="form" id="formData">
 						<div class="form-group">
 							<label for="">Sub Categories Name</label>

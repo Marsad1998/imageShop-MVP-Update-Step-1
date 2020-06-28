@@ -69,7 +69,7 @@ return mysqli_fetch_assoc(mysqli_query($dbc,"SELECT * FROM $table"));
 <?php 
 //Count Row
 function countIf($dbc,$arr){
- 	echo (mysqli_num_rows($arr)==0)?"No Found":'';
+ 	return (mysqli_num_rows($arr)==0)?"No Found":'';
 }
 ?>
 <?php 
@@ -174,6 +174,11 @@ return  mysqli_num_rows(mysqli_query($dbc,"SELECT * FROM $table WHERE $fld='$dat
   // Count When
 function countWhens($dbc,$table,$fld1,$data1,$fld2,$data2){
 return  mysqli_num_rows(mysqli_query($dbc,"SELECT * FROM $table WHERE $fld1='$data1' AND $fld2='$data2'"));
+} ?>
+<?php 
+  // Count When
+function countWhenss($dbc,$table,$fld1,$data1,$fld2,$data2,$fld3,$data3){
+return  mysqli_num_rows(mysqli_query($dbc,"SELECT * FROM $table WHERE $fld1='$data1' AND $fld2 >= '$data2'  AND $fld3='$data3'"));
 } ?>
 <?php 
 //Insert Data Function

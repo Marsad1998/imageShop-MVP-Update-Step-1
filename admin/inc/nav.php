@@ -12,8 +12,9 @@
 				<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Basic Modules</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
 					<a class="dropdown-item" href="index.php?nav=add_categories">Categories</a>
-					<a class="dropdown-item" href="index.php?nav=brands">Brands</a>
+					<a class="dropdown-item" href="index.php?nav=brands">Sub Categories</a>
 					<a class="dropdown-item" href="index.php?nav=add_images">Manage Image</a>
+					<a class="dropdown-item" href="index.php?nav=promo_code">Manage Promos</a>
 				</div>
 			</li>
 			<li class="nav-item">

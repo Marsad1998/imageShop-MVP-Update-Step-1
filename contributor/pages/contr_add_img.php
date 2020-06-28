@@ -61,7 +61,7 @@
 						$row = mysqli_fetch_assoc($query);?>
 						<input hidden="" type="text" class="form-control" name="contr_id1" id="contr_id" value="<?=$row['contr_id']?>">
 					</div>
-					<input type="" id="img_id" name="img_id"> 
+					<input class="d-none" id="img_id" name="img_id"> 
 					<button type="submit" id="saveData" name="image_data" class="btn btn-primary">Save</button>
 				</div>
 			   </form>
